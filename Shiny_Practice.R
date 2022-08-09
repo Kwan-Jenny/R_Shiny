@@ -78,3 +78,78 @@ shinyApp(ui,server)
 
 
 
+
+
+# Limited Choices
+
+animals<-c("dog","cat","mouse","bird","other","I hate animals")
+
+ui<-fluidPage(
+  selectInput("state","What's your favorite state?", state.name),
+  radioButtons("animal","What's your favorite animal?",animals)
+)
+
+
+shinyApp(ui,server)
+
+
+
+
+# File Uploads
+
+ui<-fluidPage(
+  fileInput("upload",NULL)
+)
+
+
+shinyApp(ui,server)
+
+
+
+# Action Buttons
+
+ui<-fluidPage(
+  actionButton("click","Click me!"),
+  actionButton("drink","Drink me!",icon=icon("cocktail"))
+)
+
+
+shinyApp(ui,server)
+
+
+
+# Tables
+
+ui<-fluidPage(
+  tableOutput("static"),
+  dataTableOutput("dynamic")
+)
+
+server<-function(input,output,session){
+  output$static<-renderTable(head(mtcars))
+  output$dynamic<-renderDataTable(mtcars, options=list(pageLength=5))
+}
+
+shinyApp(ui,server)
+
+
+
+
+# Plots
+
+ui<-fluidPage(
+  plotOutput("plot",width="400px")
+)
+
+
+server<-function(input,output,session){
+  output$plot<-renderPlot(plot(1:5),res=96)
+}  
+
+
+shinyApp(ui,server)  
+
+
+
+
+
