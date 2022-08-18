@@ -780,10 +780,14 @@ injuries%>%mutate(diag = fct_infreq(fct_lump(diag, n = 5)))%>%
 
 # add input control in this ui
 ui <- fluidPage(
-  fluidRow( 
-    column(6,
-           selectInput("code", "Product", choices=prod_codes)
-    )           
+  fluidRow(
+    column(8, selectInput("code", "Product",
+                              choices= setNames(products$prod_code, products$title), 
+                              width= "100%")
+                 
+                  
+   ),
+    column(2, selectInput("y", "Y axis", c("rate", "count")))
   ),
   fluidRow(
     column(4, tableOutput("diag")), 
@@ -794,6 +798,10 @@ ui <- fluidPage(
     column(12, plotOutput("age_sex"))
   )
 )
+
+# I think I need to insert something after first selectInput
+
+# It seems that I need to insert "actionButton" right after plotOutput
 
 
 injuries%>%
