@@ -5,8 +5,9 @@
 ui <- fluidPage(
   titlePanel("Central limit theorem"),
   sidebarLayout(
-    mainPanel(
-      plotOutput("hist")
+    mainPanel(fluidRow(column(4,plotOutput("hist")),
+                       column(4,plotOutput("hist2")),column(4,plotOutput("hist3")))
+      
     ),
     sidebarPanel(
       numericInput("m", "Number of samples:", 2, min = 1, max = 100)
@@ -17,6 +18,14 @@ ui <- fluidPage(
 
 server <- function(input, output, session) {
   output$hist <- renderPlot({
+    means <- replicate(1e4, mean(runif(input$m)))
+    hist(means, breaks = 20)
+  }, res = 96)
+  output$hist2 <- renderPlot({
+    means <- replicate(1e4, mean(runif(input$m)))
+    hist(means, breaks = 20)
+  }, res = 96)
+  output$hist3 <- renderPlot({
     means <- replicate(1e4, mean(runif(input$m)))
     hist(means, breaks = 20)
   }, res = 96)
@@ -38,7 +47,7 @@ ui <- fluidPage(
     mainPanel(
       plotOutput("hist")
     ),
-    position=c("left", "right")#if switch left to right and right to left then ????
+    position="right" # if switch left to right and right to left then ????
   )
 )
 

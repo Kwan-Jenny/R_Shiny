@@ -1,6 +1,6 @@
 #3. Create an app with that contains two plots, each of which takes up half of the width. Put the controls in a full width container below the plots.
 
-# can use problem 1 and 2 both ways?
+# can use problem 1 and 2 both ways? I mean use sidebarpanel and mainpanel
 
 ui <- fluidPage(
   fluidRow(
@@ -10,7 +10,7 @@ ui <- fluidPage(
            plotOutput("plot"))
   ),
   fluidRow(
-    column(12,
+    column(width=4,offset=4,
            numericInput("m", "Number of samples:", 2, min = 1, max = 100) # Rearrange it at center??
            )
   )
