@@ -1,5 +1,9 @@
 # 4. Provide a way to step through every narrative systematically with forward and backward buttons.
 
+library(shiny)
+library(forcats)
+library(dplyr)
+library(ggplot2)
 
 # add forward button and backward button on frontend
 ui <- fluidPage(
@@ -76,6 +80,7 @@ server<- function(input, output, session) { # modification based on above code
   observeEvent(input$bwd,{
     story(((story()-2)%%max_stories())+1)
   })
+  
   
   
   output$narrative<-renderText({
